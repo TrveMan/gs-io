@@ -3,10 +3,13 @@
 @import '../../styles/base.scss';
 
 .gs-stock-tile {
+  flex-grow: 0;
   background: green;
   border-radius: 5px;
   padding: 10px;
-  width: 50%;
+  margin: 5px;
+  flex-basis: calc(50% - 10px);
+  max-width: calc(50% - 10px);
   user-select: none;
   cursor: pointer;
 }
@@ -21,6 +24,10 @@
 .stock-name {
   @extend %gs-typo__light;
 
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
   margin: 0;
   color: $gs-color__white;
 }
@@ -54,7 +61,8 @@
 
 .gs-state-active {
   &.gs-stock-tile {
-    width: 100%;
+    flex-basis: calc(100% - 10px);
+    max-width: calc(100% - 10px);
   }
 
   .base-infos {

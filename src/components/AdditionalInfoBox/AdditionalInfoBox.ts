@@ -10,5 +10,8 @@ export default class AdditionalInfoBox extends Vue {
 
   private label: string = this.infos.label;
 
-  private value: number = Math.round(this.infos.value * 100) / 100;
+  get value(): string {
+    const roundedValue = Math.round(this.infos.value * 100) / 100;
+    return roundedValue.toLocaleString('de-DE', { minimumFractionDigits: 2 });
+  }
 }

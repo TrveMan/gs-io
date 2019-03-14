@@ -1,0 +1,8 @@
+@import '../../styles/colors.scss';
+@import '../../styles/typography.scss';
+@import '../../styles/base.scss';
+
+.gs-stock-list {
+  display: flex;
+  flex-wrap: wrap;
+}

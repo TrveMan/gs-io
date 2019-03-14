@@ -13,71 +13,84 @@ import AdditionalInfoBox from '@/components/AdditionalInfoBox/AdditionalInfoBox.
   },
 })
 export default class StockTile extends Vue {
-  @Prop() private name!: string;
+  @Prop() private stockData!: StockData;
 
   private active: boolean = false;
 
-  private value: number = 9.20;
+  private name: string = this.stockData.name;
 
-  private absoluteChange: number = -0.04;
+  private price: number = parseFloat(this.stockData.price);
 
-  private percentualChange: number = -0.43;
+  private changeAbs: number = parseFloat(this.stockData.day_change);
 
-  private initialValue: number = 7.4;
+  private changePct: number = parseFloat(this.stockData.change_pct);
+
+  private initialPrice: number = 150.71;
 
   private stockCount: number = 5;
-
-  additionalInfos: object[] = [
-    {
-      label: 'Kaufwert',
-      value: this.initialValue,
-      unit: '€',
-    },
-    {
-      label: 'Bestand',
-      value: this.stockCount,
-      unit: 'Stk.',
-    },
-    {
-      label: 'Wert',
-      value: this.currentValue,
-      unit: '€',
-    },
-    {
-      label: 'G/V %',
-      value: 4.3,
-      unit: '%',
-    },
-    {
-      label: 'G/V €',
-      value: this.stockChangeAbsolute,
-      unit: '€',
-    },
-    {
-      label: 'G/V Ges.',
-      value: 117.34,
-      unit: '€',
-    },
-  ];
 
   @Emit()
   openTile() {
     this.active = !this.active;
+    // this.price = this.price + 1;
+  }
+
+  get additionalInfos(): {
+    label:string,
+    value: number,
+    unit: string
+  }[] {
+    return [
+      {
+        label: 'Kaufwert',
+        value: this.initialPrice,
+        unit: '€',
+      },
+      {
+        label: 'Bestand',
+        value: this.stockCount,
+        unit: 'Stk.',
+      },
+      {
+        label: 'Wert',
+        value: this.currentValue,
+        unit: '€',
+      },
+      {
+        label: 'G/V %',
+        value: this.totalChangePct,
+        unit: '%',
+      },
+      {
+        label: 'G/V €',
+        value: this.totalChangeAbs,
+        unit: '€',
+      },
+      {
+        label: 'G/V Ges.',
+        value: this.totalValueChange,
+        unit: '€',
+      },
+    ];
   }
 
   get currentValue() {
-    return this.value * this.stockCount;
+    return this.price * this.stockCount;
   }
 
   get buyValue() {
-    return this.initialValue * this.stockCount;
+    return this.initialPrice * this.stockCount;
   }
 
-  get stockChangeAbsolute() {
-    return this.value - this.initialValue;
+  get totalChangeAbs() {
+    return this.price - this.initialPrice;
   }
 
-  get stockChangePercentual() {
-    return this.value - this.initialValue;
+  get totalChangePct() {
+    return ((this.price - this.initialPrice) / this.price) * 100;
+  }
+
+  get totalValueChange() {
+    return this.totalChangeAbs * this.stockCount;
   }
 }
