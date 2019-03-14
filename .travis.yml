@@ -1,6 +1,6 @@
 language: node_js
 before_install:
-  - npm i -g npm@version-number
+  - npm i -g npm@11.11.0
 stages:
   - lint
   - build
