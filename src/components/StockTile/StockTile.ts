@@ -6,7 +6,7 @@ import {
 } from 'vue-property-decorator';
 
 import AdditionalInfoBox from '@/components/AdditionalInfoBox/AdditionalInfoBox.vue';
-
+import Depot from '@/config/depot.config';
 @Component({
   components: {
     AdditionalInfoBox,
@@ -24,8 +24,6 @@ export default class StockTile extends Vue {
   private changeAbs: number = parseFloat(this.stockData.day_change);
 
   private changePct: number = parseFloat(this.stockData.change_pct);
-
-  private initialPrice: number = 150.71;
 
   private stockCount: number = 5;
 
@@ -92,5 +90,14 @@ export default class StockTile extends Vue {
 
   get totalValueChange() {
     return this.totalChangeAbs * this.stockCount;
+  }
+
+  get initialPrice() {
+    const stockInfo = Depot.stocks.filter(stock => stock.symbol === this.stockData.symbol);
+    if (!stockInfo.length) {
+      return 42;
+    }
+
+    return stockInfo[0].initialPrice;
   }
 }
