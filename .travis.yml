@@ -6,7 +6,6 @@ install:
 stages:
   - lint
   - build
-  - deploy
 jobs:
   include:
     - stage: lint
@@ -17,7 +16,6 @@ jobs:
       script:
         # Build all
         - npm run build
-    - stage: deploy
       deploy:
         provider: pages
         skip-cleanup: true
