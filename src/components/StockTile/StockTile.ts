@@ -6,10 +6,12 @@ import {
 } from 'vue-property-decorator';
 
 import AdditionalInfo from '@/components/AdditionalInfo/AdditionalInfo.vue';
+import Value from '@/components/Value.vue';
 import Depot from '@/config/depot.config';
 @Component({
   components: {
     AdditionalInfo,
+    Value,
   },
 })
 export default class StockTile extends Vue {
@@ -24,8 +26,6 @@ export default class StockTile extends Vue {
   private changeAbs: number = parseFloat(this.stockData.day_change);
 
   private changePct: number = parseFloat(this.stockData.change_pct);
-
-  private stockCount: number = 5;
 
   @Emit()
   openTile() {
@@ -83,7 +83,7 @@ export default class StockTile extends Vue {
       },
       {
         label: 'Stück',
-        value: this.stockCount,
+        value: this.shares,
       },
       {
         label: 'Wert',
@@ -93,11 +93,11 @@ export default class StockTile extends Vue {
   }
 
   get currentValue() {
-    return this.price * this.stockCount;
+    return this.price * this.shares;
   }
 
   get buyValue() {
-    return this.initialPrice * this.stockCount;
+    return this.initialPrice * this.shares;
   }
 
   get totalChangeAbs() {
@@ -109,15 +109,26 @@ export default class StockTile extends Vue {
   }
 
   get totalValueChange() {
-    return this.totalChangeAbs * this.stockCount;
+    return this.totalChangeAbs * this.shares;
+  }
+
+  get currentStockInfo() {
+    return Depot.stocks.filter(stock => stock.symbol === this.stockData.symbol);
   }
 
   get initialPrice() {
-    const stockInfo = Depot.stocks.filter(stock => stock.symbol === this.stockData.symbol);
-    if (!stockInfo.length) {
+    if (!this.currentStockInfo.length) {
       return 42;
     }
 
-    return stockInfo[0].initialPrice;
+    return this.currentStockInfo[0].initialPrice;
+  }
+
+  get shares() {
+    if (!this.currentStockInfo.length) {
+      return 1;
+    }
+
+    return this.currentStockInfo[0].shares;
   }
 }

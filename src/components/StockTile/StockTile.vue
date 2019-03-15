@@ -5,8 +5,8 @@
     <div class="base-infos">
       <h1 class="stock-name">{{ name }}</h1>
       <div class="stock-info">
-        <span class="current-value">{{ price }}</span>
-        <span class="pers-changes">{{ changePct }} %</span>
+        <span class="current-value"><Value :value="price" /></span>
+        <span class="pers-changes"><Value :value="changePct" /> %</span>
       </div>
     </div>
     <div class="additional-infos" v-if="active">
