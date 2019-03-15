@@ -10,9 +10,12 @@
       </div>
     </div>
     <div class="additional-infos" v-if="active">
-      <AdditionalInfoBox v-for="info in additionalInfos"
-                         :key="info.label"
-                         :infos="info" />
+      <!-- <AdditionalInfoBox v-for="info in additionalInfos"
+                        :key="info.label"
+                        :infos="info" /> -->
+        <AdditionalInfo :infoBoxes="todayInfos" headline="Heute"/>
+        <AdditionalInfo :infoBoxes="changeInfos" headline="Gewinn"/>
+        <AdditionalInfo :infoBoxes="depotInfos" headline="Bestand"/>
     </div>
   </div>
 </template>

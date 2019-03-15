@@ -48,12 +48,8 @@
   color: $gs-color__grey;
 }
 
-
 .additional-infos {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 25px 10px;
-  margin: 25px 0 10px;
+  margin: 25px 0 15px;
 }
 
 .gs-state-active {

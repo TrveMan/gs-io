@@ -18,6 +18,6 @@ body {
   background-size: cover;
   min-height: 100vh;
   color: $gs-color__white;
-
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 </style>

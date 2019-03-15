@@ -5,11 +5,11 @@ import {
   Vue,
 } from 'vue-property-decorator';
 
-import AdditionalInfoBox from '@/components/AdditionalInfoBox/AdditionalInfoBox.vue';
+import AdditionalInfo from '@/components/AdditionalInfo/AdditionalInfo.vue';
 import Depot from '@/config/depot.config';
 @Component({
   components: {
-    AdditionalInfoBox,
+    AdditionalInfo,
   },
 })
 export default class StockTile extends Vue {
@@ -30,10 +30,49 @@ export default class StockTile extends Vue {
   @Emit()
   openTile() {
     this.active = !this.active;
-    // this.price = this.price + 1;
   }
 
-  get additionalInfos(): {
+  get todayInfos(): {
+    label:string,
+    value: number,
+  }[] {
+    return [
+      {
+        label: '%',
+        value: this.changePct,
+      },
+      {
+        label: '€/Stk',
+        value: this.changeAbs,
+      },
+      {
+        label: 'Wert',
+        value: this.price,
+      },
+    ];
+  }
+
+  get changeInfos(): {
+    label:string,
+    value: number,
+  }[] {
+    return [
+      {
+        label: '%',
+        value: this.totalChangePct,
+      },
+      {
+        label: '€/Stk',
+        value: this.totalChangeAbs,
+      },
+      {
+        label: 'Gesamt',
+        value: this.totalValueChange,
+      },
+    ];
+  }
+
+  get depotInfos(): {
     label:string,
     value: number,
   }[] {
@@ -43,24 +82,12 @@ export default class StockTile extends Vue {
         value: this.initialPrice,
       },
       {
-        label: 'Bestand',
+        label: 'Stück',
         value: this.stockCount,
       },
       {
-        label: 'Gesamt',
+        label: 'Wert',
         value: this.currentValue,
-      },
-      {
-        label: 'G/V %',
-        value: this.totalChangePct,
-      },
-      {
-        label: 'G/V €',
-        value: this.totalChangeAbs,
-      },
-      {
-        label: 'G/V Ges.',
-        value: this.totalValueChange,
       },
     ];
   }
