@@ -36,38 +36,31 @@ export default class StockTile extends Vue {
   get additionalInfos(): {
     label:string,
     value: number,
-    unit: string
   }[] {
     return [
       {
         label: 'Kaufwert',
         value: this.initialPrice,
-        unit: '€',
       },
       {
         label: 'Bestand',
         value: this.stockCount,
-        unit: 'Stk.',
       },
       {
-        label: 'Wert',
+        label: 'Gesamt',
         value: this.currentValue,
-        unit: '€',
       },
       {
         label: 'G/V %',
         value: this.totalChangePct,
-        unit: '%',
       },
       {
         label: 'G/V €',
         value: this.totalChangeAbs,
-        unit: '€',
       },
       {
         label: 'G/V Ges.',
         value: this.totalValueChange,
-        unit: '€',
       },
     ];
   }

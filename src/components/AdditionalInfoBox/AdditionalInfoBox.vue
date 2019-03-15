@@ -1,7 +1,7 @@
 <template>
   <div class="additional-info-box">
     <span class="info-label">{{ label }}</span>
-    <span class="info-value">{{ value }} {{infos.unit}}</span>
+    <span class="info-value">{{ value }}</span>
   </div>
 </template>
 

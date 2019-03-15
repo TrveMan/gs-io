@@ -4,9 +4,8 @@
        v-on:click="openTile">
     <div class="base-infos">
       <h1 class="stock-name">{{ name }}</h1>
-      <span class="current-value">{{ price }}</span>
-      <div class="changes">
-        <span class="abs-changes">{{ changeAbs }}</span>
+      <div class="stock-info">
+        <span class="current-value">{{ price }}</span>
         <span class="pers-changes">{{ changePct }} %</span>
       </div>
     </div>

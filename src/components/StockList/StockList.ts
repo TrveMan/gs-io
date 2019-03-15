@@ -37,7 +37,7 @@ export default class StockList extends Vue {
     },
     {
       symbol: 'HSBA.L',
-      name: 'HSBC Holdings plc',
+      name: 'HSBC',
       currency: 'GBX',
       price: '620.40',
       price_open: '618.90',
@@ -61,7 +61,7 @@ export default class StockList extends Vue {
     },
     {
       symbol: 'MSFT',
-      name: 'Microsoft Corporation',
+      name: 'Microsoft',
       currency: 'USD',
       price: '114.59',
       price_open: '114.54',

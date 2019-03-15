@@ -9,11 +9,13 @@
 %gs-typo__reg {
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
-  font-size: 24px;
+  -webkit-font-smoothing: antialiased;
+  font-size: 18px;
 }
 
 %gs-typo__bold {
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
+  -webkit-font-smoothing: antialiased;
   font-size: 24px;
 }
