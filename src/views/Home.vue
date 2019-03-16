@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <Header />
     <StockList />
   </div>
 </template>
@@ -7,10 +8,12 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import StockList from '@/components/StockList/StockList.vue';
+import Header from '@/components/Header.vue';
 
 @Component({
   components: {
     StockList,
+    Header,
   },
 })
 export default class Home extends Vue {
