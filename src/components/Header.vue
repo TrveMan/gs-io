@@ -24,8 +24,8 @@ export default class Header extends Vue {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50vh;
-    max-height: 300px;
+    height: 75vh;
+    // max-height: 300px;
 
     &__logo {
       margin-top: -5px;
