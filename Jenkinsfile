@@ -1,9 +1,23 @@
 pipeline {
-    agent { docker { image 'maven:3.6.1' } }
+    agent { docker { image 'node:11.11.0' } }
+    environment {
+        HOME = '.'
+    }
     stages {
+        stage('install') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('lint') {
+            steps {
+                sh 'npm run lint'
+            }
+        }
         stage('build') {
             steps {
-                sh 'mvn clean install'
+                sh 'npm --version'
+                sh 'npm run build'
             }
         }
     }
