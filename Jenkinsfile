@@ -20,5 +20,9 @@ pipeline {
                 sh 'npm run build'
             }
         }
+        stage('create artifact') {
+            archiveArtifacts artifacts: 'dist/**',
+            onlyIfSuccessful: true
+        }
     }
 }
