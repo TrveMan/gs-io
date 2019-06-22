@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+
+  <groupId>io.gs</groupId>
+  <artifactId>io.gs.root</artifactId>
+  <packaging>pom</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <name>GS iO</name>
+  <description>Stock App Test</description>
+
+  <properties>
+    <node.version>11.11.0</node.version>
+    <npm.version>6.7.0</npm.version>
+    <skipITs>true</skipITs>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>io.wcm.maven.plugins</groupId>
+        <artifactId>nodejs-maven-plugin</artifactId>
+        <executions>
+          <!-- 1. execute 'npm install' (phase: prepare-resources) to make sure all npm dependencies are installed -->
+          <execution>
+            <id>npm-install</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <nodeJsVersion>${node.version}</nodeJsVersion>
+              <npmVersion>${npm.version}</npmVersion>
+              <tasks>
+                <nodeJsTask>
+                  <workingDirectory>${project.basedir}</workingDirectory>
+                  <moduleName>npm</moduleName>
+                  <executableName>npm-cli</executableName>
+                  <arguments>
+                    <argument>ci</argument>
+                  </arguments>
+                </nodeJsTask>
+              </tasks>
+            </configuration>
+          </execution>
+          <!-- 2. execute 'npm run build' (phase: compile) to generate frontend distrbutable artifact (see grunt task 'build-aem') -->
+          <execution>
+            <id>generate-frontend-resources</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <nodeJsVersion>${node.version}</nodeJsVersion>
+              <npmVersion>${npm.version}</npmVersion>
+              <tasks>
+                <nodeJsTask>
+                  <workingDirectory>${project.basedir}</workingDirectory>
+                  <moduleName>npm</moduleName>
+                  <executableName>npm-cli</executableName>
+                  <arguments>
+                    <argument>run</argument>
+                    <argument>build</argument>
+                  </arguments>
+                </nodeJsTask>
+                <nodeJsTask>
+                  <workingDirectory>${project.basedir}</workingDirectory>
+                  <moduleName>npm</moduleName>
+                  <executableName>npm-cli</executableName>
+                  <arguments>
+                    <argument>run</argument>
+                    <argument>lint</argument>
+                  </arguments>
+                </nodeJsTask>
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
