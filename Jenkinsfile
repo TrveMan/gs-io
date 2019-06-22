@@ -1,9 +1,19 @@
 pipeline {
-    agent { docker { image 'node:6.3' } }
+    agent { docker { image 'node:11.11.0' } }
     stages {
+        stage('install') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('lint') {
+            steps {
+                sh 'npm run lint'
+            }
+        }
         stage('build') {
             steps {
-                sh 'npm --version'
+                sh 'npm run build'
             }
         }
     }
