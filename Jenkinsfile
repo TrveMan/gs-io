@@ -21,8 +21,10 @@ pipeline {
             }
         }
         stage('create artifact') {
-            archiveArtifacts artifacts: 'dist/**',
-            onlyIfSuccessful: true
+            steps {
+                archiveArtifacts artifacts: 'dist/**',
+                onlyIfSuccessful: true
+            }  
         }
     }
 }
